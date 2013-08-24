@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<!-- http client plug-in configuration -->
+	<bean id="httpclientPlugin" class="com.baidu.dudu.httpclient.HttpClientPlugin"
+		singleton="false" destroy-method="stop">
+		<property name="incomingMessageHandler">
+			<ref local="incomingMessageHandler" />
+		</property>
+		<property name="httpClient">
+			<ref local="simpleHttpClient" />
+		</property>
+	</bean>
+
+	<bean id="simpleHttpClient" class="com.baidu.dudu.httpclient.impl.DuDuSimpleHttpClient">
+	</bean>
+
+	<!-- http server plug-in configuration -->
+	<bean id="httpserverPlugin" class="com.baidu.dudu.plugin.httpserver.HttpServerPlugin"
+		singleton="false" destroy-method="stop">
+		<property name="incomingMessageHandler">
+			<ref local="incomingMessageHandler" />
+		</property>
+		<property name="httpServer">
+			<ref local="nettyHttpServer" />
+		</property>
+	</bean>
+
+	<bean id="nettyHttpServer"
+		class="com.baidu.dudu.plugin.httpserver.impl.DuDuNettyHttpServer">
+		<constructor-arg>
+			<value>${plugin.httpserver.port}</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- database plug-in configuration -->
+	<bean id="databasePlugin" class="com.baidu.dudu.plugin.database.DatabasePlugin"
+		singleton="false">
+		<property name="incomingMessageHandler">
+			<ref local="incomingMessageHandler" />
+		</property>
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- common component -->
+	<bean id="incomingMessageHandler"
+		class="com.baidu.dudu.framework.handler.IncomingMessageHandlerImpl"
+		singleton="false">
+		<constructor-arg>
+			<ref local="mapper" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref local="receivedMessageQueue" />
+		</constructor-arg>
+		<constructor-arg>
+			<value>${frame.message.timeout}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="mapper" class="com.baidu.dudu.framework.mapper.DefaultMapper"
+		singleton="false" />
+	<bean id="receivedMessageQueue" class="java.util.concurrent.LinkedBlockingQueue"
+		singleton="false" />
+</beans>

@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.baidu.dudu</groupId>
+	<artifactId>dudu</artifactId>
+	<version>SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>DuDu Test</name>
+
+
+	<properties>
+		<org.springframework.version>3.2.2.RELEASE</org.springframework.version>
+		<slf4j.version>1.6.4</slf4j.version>
+	</properties>
+
+	<modules>
+		<module>dudu-framework</module>
+		<module>dudu-network-http</module>
+		<module>dudu-network-ftp</module>
+		<module>dudu-network-netty</module>
+		<module>dudu-network-mina</module>
+		<module>dudu-network-io</module>
+		<module>dudu-plugin-database</module>
+		<module>dudu-plugin-httpclient</module>
+		<module>dudu-plugin-httpserver</module>
+		<module>dudu-scripts</module>
+	</modules>
+
+</project>

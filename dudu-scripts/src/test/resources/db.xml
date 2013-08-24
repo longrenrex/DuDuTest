@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<database name="testdb01">
+		<dbtype>oracle</dbtype>
+		<url>jdbc:oracle:thin:@localhost:1521:xe</url>
+		<username>superuser</username>
+		<password>R4hB1yoF</password>
+	</database>
+	<database name="testdb02">
+		<dbtype>mysql</dbtype>
+		<url>jdbc:mysql://localhost:3306/sakila</url>
+		<username>root</username>
+		<password>seven777</password>
+	</database>
+</configuration>

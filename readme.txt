@@ -1,0 +1,2 @@
+mvn install:install-file -Dfile=ojdbc14.jar -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0 -Dpackaging=jar
+mvn install:install-file -Dfile=jgroups-2.12.1.Final.jar -DgroupId=jgroups -DartifactId=jgroups-all -Dversion=2.12.1 -Dpackaging=jar

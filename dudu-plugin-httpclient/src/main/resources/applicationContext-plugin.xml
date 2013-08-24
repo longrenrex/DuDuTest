@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<!-- http client plug-in configuration -->
+	<bean id="httpclientPlugin" class="com.baidu.dudu.httpclient.HttpClientPlugin"
+		singleton="false" destroy-method="stop">
+		<property name="incomingMessageHandler">
+			<ref local="incomingMessageHandler" />
+		</property>
+		<property name="httpClient">
+			<ref local="simpleHttpClient" />
+		</property>
+	</bean>
+
+	<bean id="simpleHttpClient" class="com.baidu.dudu.httpclient.impl.DuDuSimpleHttpClient">
+	</bean>
+
+	<!-- common component -->
+	<bean id="incomingMessageHandler"
+		class="com.baidu.dudu.framework.handler.IncomingMessageHandlerImpl"
+		singleton="false">
+		<constructor-arg>
+			<ref local="mapper" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref local="receivedMessageQueue" />
+		</constructor-arg>
+		<constructor-arg>
+			<value>${frame.message.timeout}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="mapper" class="com.baidu.dudu.framework.mapper.DefaultMapper"
+		singleton="false" />
+	<bean id="receivedMessageQueue" class="java.util.concurrent.LinkedBlockingQueue"
+		singleton="false" />
+</beans>

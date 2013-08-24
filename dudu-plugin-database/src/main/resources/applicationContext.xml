@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 
+	<bean id="log4jSpringConfigure" class="com.baidu.dudu.framework.log4j.Log4jSpringConfigurer"
+		init-method="init" destroy-method="destroy">
+		<property name="log4jRefreshInterval" value="30" />
+	</bean>
+	-->
+	 
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
